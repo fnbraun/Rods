@@ -25,8 +25,9 @@ size(200, 200);
 
 void draw(){
   background(0);
-  text("experimental branch",30,50);
   text(angle,30,30);
+  
+  text("exp1",30,50);
   
   float min_distance=1e3;
   int nearest_i=-1;
