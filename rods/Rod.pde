@@ -1,20 +1,13 @@
 class Rod {
   PVector midpoint;
   float theta;
-//  xl,yl,xh,yh; 
   
-  // Constructor
   Rod(PVector midpoint, float theta) {
     
     this.midpoint=midpoint; 
     this.theta=theta;
  
- 
- /*   float dx=0.5*rlen*cos(theta);
-   float dy=0.5*rlen*sin(theta);
-   xl=xmid-dx;yl=ymid+dy;
-   xh=xmid+dx;yh=ymid-dy;*/
-  }
+   }
 
 
   void draw() 
@@ -28,12 +21,16 @@ class Rod {
      }
      
     
-    /* float distance()  // calculate the distance from mouse to rod
+     float distance()  // from mouse to rod
      {
-              
+             
+        PVector b = new PVector(rlen*cos(theta),-rlen*sin(theta));
+        
+        float rodend_x=midpoint.x-0.5*b.x;
+        float rodend_y=midpoint.y-0.5*b.y;
        
-        PVector a = new PVector(mouseX-xl,mouseY-yl);
-        PVector b = new PVector(xh-xl,yh-yl);
+        PVector a = new PVector(mouseX-rodend_x,mouseY-rodend_y);  // mouse-to-rodend vector
+       
         
         if (a.dot(b)<0) return a.mag();
         if (a.dot(b)>b.dot(b)) return a.dist(b);
@@ -42,7 +39,7 @@ class Rod {
            
                
        
-      }*/
+      }
      
 }
 
