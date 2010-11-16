@@ -1,35 +1,48 @@
 class Rod {
-  float xmid,ymid,xl,yl,xh,yh,theta; 
+  PVector midpoint;
+  float theta;
+//  xl,yl,xh,yh; 
   
   // Constructor
-  Rod(float x_set, float y_set, float theta_set) {
-    xmid = x_set; ymid=y_set; 
-    theta=radians(theta_set);
-    float dx=0.5*rlen*cos(theta);
+  Rod(PVector midpoint, float theta) {
+    
+    this.midpoint=midpoint; 
+    this.theta=theta;
+ 
+ 
+ /*   float dx=0.5*rlen*cos(theta);
    float dy=0.5*rlen*sin(theta);
    xl=xmid-dx;yl=ymid+dy;
-   xh=xmid+dx;yh=ymid-dy;
+   xh=xmid+dx;yh=ymid-dy;*/
   }
 
 
   void draw() 
   {        
- //  line(x-dx,y+dy,x+dx,y-dy);
-   line(xl,yl,xh,yh); 
+    pushMatrix();
+    translate(midpoint.x,midpoint.y);
+    rotate(-theta);
+    line(rlen/2,0,-rlen/2,0);
+    
+    popMatrix(); 
      }
      
-     float distance()
+    
+    /* float distance()  // calculate the distance from mouse to rod
      {
-        float ax=mouseX-xl;
-        float ay=mouseY-yl;
+              
+       
+        PVector a = new PVector(mouseX-xl,mouseY-yl);
+        PVector b = new PVector(xh-xl,yh-yl);
         
-        float bx=xh-xl;
-        float by=yh-yl;
+        if (a.dot(b)<0) return a.mag();
+        if (a.dot(b)>b.dot(b)) return a.dist(b);
         
-        if (ax*bx+ay*by<0) return mag(ax,ay);
-        if (ax*bx+ay*by>bx*bx+by*by) return dist(ax,ay,bx,by);    
-        return abs(ax*by-ay*bx)/mag(bx,by);
-            }
+        return a.cross(b).mag()/b.mag();
+           
+               
+       
+      }*/
      
 }
 
