@@ -43,9 +43,21 @@ class Rod {
         
         return a.cross(b).mag()/b.mag();
            
-               
+       
        
       }
+      
+      void move(){
+      
+      midpoint.x=mouseX;
+      midpoint.y=mouseY; 
+      
+      }
+      
+      void orient(){
+      theta= atan(-(midpoint.y-mouseY)/(midpoint.x-mouseX));
+      }
+      
      
 }
 
