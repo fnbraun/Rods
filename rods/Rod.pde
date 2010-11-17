@@ -1,12 +1,13 @@
 class Rod {
   PVector midpoint;
   float theta;
+  int rlen;
   
-  Rod(PVector midpoint, float theta) {
+  Rod(PVector midpoint, float theta, int rlen) {
     
     this.midpoint=midpoint; 
     this.theta=theta;
- 
+    this.rlen=rlen;
    }
 
 
@@ -16,6 +17,8 @@ class Rod {
     translate(midpoint.x,midpoint.y);
     rotate(-theta);
     line(rlen/2,0,-rlen/2,0);
+    
+    //ellipse(0,0,rlen,rlen/5);
     
     popMatrix(); 
      }
