@@ -5,9 +5,11 @@
 int rlen = 40;  //rod length 
 float x1,y1,x2,y2; 
 
-boolean rod_selected=false;
+boolean mouseover=false;
 boolean grip=false;
 int selected_i;
+
+Rod selected_rod;
 
 ArrayList rods;
 
@@ -29,47 +31,62 @@ void draw(){
   
   text("Drag to Draw",30,50);
   
-  float min_distance=1e3;
-  int nearest_i=-1;
+//  float min_distance=1e3;
+//  int nearest_i=-1;
   for (int i = rods.size()-1; i >= 0; i--) { 
     Rod rod = (Rod) rods.get(i);
     rod.draw();
-    
-    float distance=rod.distance();
-     if (distance< min_distance) {min_distance=distance; nearest_i=i;}
+      
+  //  float distance=rod.distance();
+   //  if (distance< min_distance) {min_distance=distance; nearest_i=i;}
        
  }
 
-     if (grip) highlightSelected();
-     else if (min_distance<5) setSelected(nearest_i);
-     else rod_selected=false;
-  
-  
-   
-  
+     if (grip) selected_rod.highlight();
+     else mouseover=checkForMouseover();
+     
+       
 }
 
 
-void setSelected(int i){
-    rod_selected=true;
-    selected_i=i;
-    highlightSelected();
-}
 
-void highlightSelected(){
+/*
+void highlightRod(Rod rod){
     
     stroke(100);
-    Rod rod = (Rod) rods.get(selected_i);
+    //Rod rod = (Rod) rods.get(selected_i);
     rod.draw();
     stroke(200);
 }
+*/
 
+
+boolean checkForMouseover(){
+    float min_distance=1e3;
+    int nearest_i=-1;
+      
+    for (int i = rods.size()-1; i >= 0; i--) { 
+                           Rod rod = (Rod) rods.get(i);
+                           float distance=rod.distance();
+                      if (distance< min_distance) {min_distance=distance; nearest_i=i;}
+                                 }
+ 
+    if (min_distance<5){                         
+                          selected_rod = (Rod) rods.get(nearest_i);
+                          selected_rod.highlight();
+                          return true;
+                        }
+       return false;
+                 
+  }
 
 void mousePressed() {
   
   x1=mouseX;y1=mouseY;
   
-  if (rod_selected) grip=true; 
+  if (mouseover) grip=true; 
+  
+//  Rod rod = (Rod) rods.get(selected_i);
   
 }
 

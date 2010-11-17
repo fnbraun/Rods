@@ -19,7 +19,13 @@ class Rod {
     
     popMatrix(); 
      }
-     
+    
+      
+   void highlight(){   
+    stroke(100);
+    this.draw();
+    stroke(200);   
+   }
     
      float distance()  // from mouse to rod
      {
